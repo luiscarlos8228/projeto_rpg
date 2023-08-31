@@ -94,7 +94,7 @@ if esc == "3":
 elif esc == "2":
     audio("select.wav")
     time.sleep(1)
-    dados_salvos = carregar_dados('E:/Users/lu/PycharmProjects/pythonProject/projetorpg/dadinhos.pk1')
+    dados_salvos = carregar_dados('')
 
     if dados_salvos:
         dados_personagem = dados_salvos
