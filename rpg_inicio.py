@@ -37,7 +37,7 @@ def audio(som):
     pygame.mixer.init()
     sound = pygame.mixer.Sound(som)
     sound.play()
-    time.sleep(2)
+    time.sleep(1)
     pygame.mixer.quit()
     return
 
@@ -82,6 +82,7 @@ def carregar_dados(dadinhos):
             return pickle.load(arquivo)
     except FileNotFoundError:
         return None
+
 audio("musics.wav")
 
 esc = input("Ola! Oque quer fazer? :\n1 - Começar um novo jogo\n2 - Carregar um jogo salvo\n3 - Sair do programa\nR: ")
@@ -93,9 +94,7 @@ if esc == "3":
 
 elif esc == "2":
     audio("select.wav")
-    time.sleep(1)
-    dados_salvos = carregar_dados('')
-
+    dados_salvos = carregar_dados('E:/Users/lu/PycharmProjects/pythonProject/projetorpg/dadinhos.pk1')
     if dados_salvos:
         dados_personagem = dados_salvos
         print(f"Carregando o jogo salvo para {dados_personagem['nome']}...")
@@ -133,40 +132,38 @@ elif esc == "1":
     else:
         print("Número inválido")
         audio("erro.wav")
-
         escolha = input("Quer escolher de novo? (sim/não): ")
         audio("select.wav")
+        if escolha == "sim":
+            esc = input("Você quer:\n1 - Começar um novo jogo\n2 - Carregar um jogo salvo\n3 - Sair do programa\nR: ")
+            if esc in opcoes_validas:
+                if esc == "3":
+                    print("Até a próxima!")
+                    audio("yamete.wav")
 
-    if escolha.lower() == "sim":
-        esc = input("Você quer:\n1 - Começar um novo jogo\n2 - Carregar um jogo salvo\n3 - Sair do programa\nR: ")
-        if esc in opcoes_validas:
-            if esc == "3":
-                print("Até a próxima!")
-                audio("yamete.wav")
+                elif esc == "2":
+                    print("Ok, vamos carregar um jogo salvo...")
+                    audio("select.wav")
 
-            elif esc == "2":
-                print("Ok, vamos carregar um jogo salvo...")
-                audio("select.wav")
+                elif esc == "1":
+                    print("E lá vamos nós!")
+                    audio("select.wav")
 
-            elif esc == "1":
-                print("E lá vamos nós!")
-                audio("select.wav")
+                    nome_personagem = input("Qual é o nome do seu personagem? ")
+                    audio("select.wav")
 
-                nome_personagem = input("Qual é o nome do seu personagem? ")
-                audio("select.wav")
+                    idade_personagem = input("Quantos anos seu personagem tem? ")
+                    audio("select.wav")
 
-                idade_personagem = input("Quantos anos seu personagem tem? ")
-                audio("select.wav")
+                    altura_personagem = input("Qual é a altura do seu personagem? ")
+                    audio("select.wav")
 
-                altura_personagem = input("Qual é a altura do seu personagem? ")
-                audio("select.wav")
+                    escolher_raca()
 
-                escolher_raca()
+        elif escolha.lower() == "não":
+            print("Encerrando (nome jogo).")
+            audio("musics.wav")
 
-    elif escolha.lower() == "não":
-        print("Encerrando (nome jogo).")
-        audio("musics.wav")
-
-    else:
-        print("Escolha inválida. Por favor, digite 'sim' ou 'não'.")
-        audio("erro.wav")
+        else:
+            print("Escolha inválida. Por favor, digite 'sim' ou 'não'.")
+            audio("erro.wav")
